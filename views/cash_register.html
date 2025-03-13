@@ -14,18 +14,18 @@
             <th>Denomination</th>
             <th>Quantity</th>
         </tr>
-        <tr><td>1¢</td><td><input type="number" id="c1" value="0"></td></tr>
-        <tr><td>5¢</td><td><input type="number" id="c5" value="0"></td></tr>
-        <tr><td>10¢</td><td><input type="number" id="c10" value="0"></td></tr>
-        <tr><td>25¢</td><td><input type="number" id="c25" value="0"></td></tr>
-        <tr><td>50¢</td><td><input type="number" id="c50" value="0"></td></tr>
-        <tr><td>$1</td><td><input type="number" id="c100" value="0"></td></tr>
-        <tr><td>$5</td><td><input type="number" id="c500" value="0"></td></tr>
-        <tr><td>$10</td><td><input type="number" id="c1000" value="0"></td></tr>
-        <tr><td>$20</td><td><input type="number" id="c2000" value="0"></td></tr>
+        <tr><td>1¢</td><td><input type="number" id="c1" value="0" min="0" step="1"></td></tr>
+        <tr><td>5¢</td><td><input type="number" id="c5" value="0" min="0" step="1"></td></tr>
+        <tr><td>10¢</td><td><input type="number" id="c10" value="0" min="0" step="1"></td></tr>
+        <tr><td>25¢</td><td><input type="number" id="c25" value="0" min="0" step="1"></td></tr>
+        <tr><td>50¢</td><td><input type="number" id="c50" value="0" min="0" step="1"></td></tr>
+        <tr><td>$1</td><td><input type="number" id="c100" value="0" min="0" step="1"></td></tr>
+        <tr><td>$5</td><td><input type="number" id="c500" value="0" min="0" step="1"></td></tr>
+        <tr><td>$10</td><td><input type="number" id="c1000" value="0" min="0" step="1"></td></tr>
+        <tr><td>$20</td><td><input type="number" id="c2000" value="0" min="0" step="1"></td></tr>
     </table>
     <label for="holdover">Holdover Amount: </label>
-    <input type="number" id="holdover" value="0">
+    <input type="number" id="holdover" value="0" min="0" step="1">
     <br>
     <button id="calculate">End Day</button>
     <h2>Coins to Remove</h2>

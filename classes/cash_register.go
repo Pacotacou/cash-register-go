@@ -24,6 +24,10 @@ func (cr *CashRegister) EndDay(holdover int) (map[int]int, error) {
 		total += value * quantity
 	}
 
+	if total == 0 {
+		return nil, errors.New("cash register is empty")
+	}
+
 	if holdover > total {
 		return nil, errors.New("holdover amount exceeds total cash in register")
 	}
@@ -41,6 +45,9 @@ func (cr *CashRegister) EndDay(holdover int) (map[int]int, error) {
 			removal[value] = qtyToRemove
 			remaining -= value * qtyToRemove
 		}
+	}
+	if remaining != 0 {
+		return nil, errors.New("cannot archieve holdover with available coins")
 	}
 
 	return removal, nil

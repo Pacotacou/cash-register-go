@@ -13,6 +13,7 @@ $(document).ready(function() {
         };
         let holdover = parseInt($('#holdover').val());
         
+
         $.ajax({
             url: '/end-day',
             type: 'POST',
@@ -24,8 +25,13 @@ $(document).ready(function() {
                     $('#result').append('<li>' + coin + '¢: ' + quantity + '</li>');
                 });
             },
-            error: function() {
-                alert('Error processing request');
+            error: function(xhr) {
+                let errorMessage = "Error processing request";
+                try {
+                    const response = JSON.parse(xhr.responseText);
+                    errorMessage = response.error || errorMessage;
+                } catch (e) {}
+                alert(errorMessage); // Replace with a user-friendly error display
             }
         });
     });

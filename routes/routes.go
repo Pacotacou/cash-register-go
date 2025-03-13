@@ -1,6 +1,7 @@
 package routes
 
 import (
+	"encoding/json"
 	"net/http"
 	"github.com/gorilla/mux"
 	"cash-register/controllers"
@@ -28,6 +29,7 @@ func RegisterRoutes() *mux.Router {
 
 // Handlers
 func pingHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json") // Add this
 	w.WriteHeader(http.StatusOK)
-	w.Write([]byte("pong"))
+	json.NewEncoder(w).Encode(map[string]string{"message": "pong"})
 }
