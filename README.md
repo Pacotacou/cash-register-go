@@ -2,6 +2,8 @@
 
 A web-based cash register system that calculates the coins to be removed at the end of the day to match a specified holdover amount. Built with Go (backend), HTML/CSS (frontend), and JavaScript (client-side logic).
 
+![Cash Register Screenshot](./assets/screenshot.png)
+
 ---
 
 ## Features
@@ -49,10 +51,3 @@ cash-register/
 - **Git**: Install Git from [https://git-scm.com/](https://git-scm.com/).
 
 ---
-
-## Setup Instructions
-
-1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/your-username/cash-register.git
-   cd cash-register
