@@ -3,34 +3,234 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cash Register</title>
+    <title>Cash Register End-of-Day</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="/styles/cash_register.css">
 </head>
 <body>
-    <h1>Cash Register</h1>
-    <table>
-        <tr>
-            <th>Denomination</th>
-            <th>Quantity</th>
-        </tr>
-        <tr><td>1¢</td><td><input type="number" id="c1" value="0" min="0" step="1"></td></tr>
-        <tr><td>5¢</td><td><input type="number" id="c5" value="0" min="0" step="1"></td></tr>
-        <tr><td>10¢</td><td><input type="number" id="c10" value="0" min="0" step="1"></td></tr>
-        <tr><td>25¢</td><td><input type="number" id="c25" value="0" min="0" step="1"></td></tr>
-        <tr><td>50¢</td><td><input type="number" id="c50" value="0" min="0" step="1"></td></tr>
-        <tr><td>$1</td><td><input type="number" id="c100" value="0" min="0" step="1"></td></tr>
-        <tr><td>$5</td><td><input type="number" id="c500" value="0" min="0" step="1"></td></tr>
-        <tr><td>$10</td><td><input type="number" id="c1000" value="0" min="0" step="1"></td></tr>
-        <tr><td>$20</td><td><input type="number" id="c2000" value="0" min="0" step="1"></td></tr>
-    </table>
-    <label for="holdover">Holdover Amount: </label>
-    <input type="number" id="holdover" value="0" min="0" step="1">
-    <br>
-    <button id="calculate">End Day</button>
-    <h2>Coins to Remove</h2>
-    <ul id="result"></ul>
-    
+    <div class="container">
+        <div class="header">
+            <h1 class="title">Cash Register</h1>
+            <p class="subtitle">End-of-Day Cash Management</p>
+        </div>
+        
+        <div id="errorMessage" class="alert alert-danger">
+            <i class="fas fa-exclamation-circle"></i>
+            <span id="errorText"></span>
+        </div>
+        
+        <div class="grid">
+            <div class="card">
+                <h2 class="card-title">
+                    <i class="fas fa-coins"></i>
+                    Current Register Contents
+                </h2>
+                
+                <div class="coin-grid">
+                    <div class="coin-input">
+                        <div class="coin-label">
+                            <div class="denomination">1¢</div>
+                            <div class="label-text">Pennies</div>
+                        </div>
+                        <div class="coin-value">
+                            <input type="number" id="c1" value="0" min="0" step="1">
+                            <div class="btn-controls">
+                                <button class="btn-control increment" data-target="c1"><i class="fas fa-plus"></i></button>
+                                <button class="btn-control decrement" data-target="c1"><i class="fas fa-minus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="coin-input">
+                        <div class="coin-label">
+                            <div class="denomination">5¢</div>
+                            <div class="label-text">Nickels</div>
+                        </div>
+                        <div class="coin-value">
+                            <input type="number" id="c5" value="0" min="0" step="1">
+                            <div class="btn-controls">
+                                <button class="btn-control increment" data-target="c5"><i class="fas fa-plus"></i></button>
+                                <button class="btn-control decrement" data-target="c5"><i class="fas fa-minus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="coin-input">
+                        <div class="coin-label">
+                            <div class="denomination">10¢</div>
+                            <div class="label-text">Dimes</div>
+                        </div>
+                        <div class="coin-value">
+                            <input type="number" id="c10" value="0" min="0" step="1">
+                            <div class="btn-controls">
+                                <button class="btn-control increment" data-target="c10"><i class="fas fa-plus"></i></button>
+                                <button class="btn-control decrement" data-target="c10"><i class="fas fa-minus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="coin-input">
+                        <div class="coin-label">
+                            <div class="denomination">25¢</div>
+                            <div class="label-text">Quarters</div>
+                        </div>
+                        <div class="coin-value">
+                            <input type="number" id="c25" value="0" min="0" step="1">
+                            <div class="btn-controls">
+                                <button class="btn-control increment" data-target="c25"><i class="fas fa-plus"></i></button>
+                                <button class="btn-control decrement" data-target="c25"><i class="fas fa-minus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="coin-input">
+                        <div class="coin-label">
+                            <div class="denomination">50¢</div>
+                            <div class="label-text">Half Dollars</div>
+                        </div>
+                        <div class="coin-value">
+                            <input type="number" id="c50" value="0" min="0" step="1">
+                            <div class="btn-controls">
+                                <button class="btn-control increment" data-target="c50"><i class="fas fa-plus"></i></button>
+                                <button class="btn-control decrement" data-target="c50"><i class="fas fa-minus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="coin-input">
+                        <div class="coin-label">
+                            <div class="denomination">$1</div>
+                            <div class="label-text">Dollars</div>
+                        </div>
+                        <div class="coin-value">
+                            <input type="number" id="c100" value="0" min="0" step="1">
+                            <div class="btn-controls">
+                                <button class="btn-control increment" data-target="c100"><i class="fas fa-plus"></i></button>
+                                <button class="btn-control decrement" data-target="c100"><i class="fas fa-minus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="coin-input">
+                        <div class="coin-label">
+                            <div class="denomination">$5</div>
+                            <div class="label-text">Five Dollars</div>
+                        </div>
+                        <div class="coin-value">
+                            <input type="number" id="c500" value="0" min="0" step="1">
+                            <div class="btn-controls">
+                                <button class="btn-control increment" data-target="c500"><i class="fas fa-plus"></i></button>
+                                <button class="btn-control decrement" data-target="c500"><i class="fas fa-minus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="coin-input">
+                        <div class="coin-label">
+                            <div class="denomination">$10</div>
+                            <div class="label-text">Ten Dollars</div>
+                        </div>
+                        <div class="coin-value">
+                            <input type="number" id="c1000" value="0" min="0" step="1">
+                            <div class="btn-controls">
+                                <button class="btn-control increment" data-target="c1000"><i class="fas fa-plus"></i></button>
+                                <button class="btn-control decrement" data-target="c1000"><i class="fas fa-minus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="coin-input">
+                        <div class="coin-label">
+                            <div class="denomination">$20</div>
+                            <div class="label-text">Twenty Dollars</div>
+                        </div>
+                        <div class="coin-value">
+                            <input type="number" id="c2000" value="0" min="0" step="1">
+                            <div class="btn-controls">
+                                <button class="btn-control increment" data-target="c2000"><i class="fas fa-plus"></i></button>
+                                <button class="btn-control decrement" data-target="c2000"><i class="fas fa-minus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="total-display" id="totalContainer">
+                    <span class="total-label">Total in Register:</span>
+                    <span class="total-value" id="totalAmount">$0.00</span>
+                </div>
+                
+                <div class="holdover-section">
+                    <h3>End of Day Settings</h3>
+                    <div class="holdover-input">
+                        <label for="holdover">
+                            Holdover Amount:
+                            <span class="tooltip">
+                                <i class="fas fa-info-circle"></i>
+                                <span class="tooltiptext">Amount to be kept in the register for the next day</span>
+                            </span>
+                        </label>
+                        <div class="formatted-currency">
+                            <span class="currency-symbol">$</span>
+                            <input type="number" id="holdover" value="0" min="0" step="1" class="currency-input">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="action-bar">
+                    <button class="btn btn-secondary" id="reset">
+                        <i class="fas fa-sync"></i>
+                        Reset
+                    </button>
+                    <button class="btn btn-primary btn-lg" id="calculate">
+                        <i class="fas fa-calculator"></i>
+                        Calculate End Day
+                    </button>
+                </div>
+            </div>
+            
+            <div class="card results-card" id="resultsCard">
+                <h2 class="card-title">
+                    <i class="fas fa-money-bill-wave"></i>
+                    Cash to Remove
+                </h2>
+                
+                <div class="summary-section">
+                    <div class="summary-item">
+                        <span>Total in Register:</span>
+                        <span id="summaryTotal">$0.00</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Holdover Amount:</span>
+                        <span id="summaryHoldover">$0.00</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>Amount to Remove:</span>
+                        <span id="summaryRemove">$0.00</span>
+                    </div>
+                </div>
+                
+                <h3 style="margin-top: 1.5rem; margin-bottom: 0.5rem;">Denominations to Remove:</h3>
+                <div id="result" class="results-list">
+                    <!-- Results will be added here by JS -->
+                </div>
+                
+                <div class="action-bar">
+                    <button class="btn btn-secondary" id="printResults">
+                        <i class="fas fa-print"></i>
+                        Print
+                    </button>
+                    <button class="btn btn-primary" id="newCalculation">
+                        <i class="fas fa-redo"></i>
+                        New Calculation
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="loading" id="loadingSpinner"></div>
+    </div>
+
     <script src="/public/cash_register.js"></script>
 </body>
 </html>
