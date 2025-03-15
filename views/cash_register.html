@@ -11,8 +11,19 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1 class="title">Cash Register</h1>
-            <p class="subtitle">End-of-Day Cash Management</p>
+            <div class="header-content">
+                <div>
+                    <h1 class="title" data-i18n="title">Cash Register</h1>
+                    <p class="subtitle" data-i18n="subtitle">End-of-Day Cash Management</p>
+                </div>
+                <div class="language-selector">
+                    <label for="languageSelect" class="language-label" data-i18n="language">Language:</label>
+                    <select id="languageSelect" class="language-select">
+                        <option value="en">English</option>
+                        <option value="es">Español</option>
+                    </select>
+                </div>
+            </div>
         </div>
         
         <div id="errorMessage" class="alert alert-danger">
@@ -24,14 +35,14 @@
             <div class="card">
                 <h2 class="card-title">
                     <i class="fas fa-coins"></i>
-                    Current Register Contents
+                    <span data-i18n="registerContents">Current Register Contents</span>
                 </h2>
                 
                 <div class="coin-grid">
                     <div class="coin-input">
                         <div class="coin-label">
                             <div class="denomination">1¢</div>
-                            <div class="label-text">Pennies</div>
+                            <div class="label-text" data-i18n="pennies">Pennies</div>
                         </div>
                         <div class="coin-value">
                             <input type="number" id="c1" value="0" min="0" step="1">
@@ -45,7 +56,7 @@
                     <div class="coin-input">
                         <div class="coin-label">
                             <div class="denomination">5¢</div>
-                            <div class="label-text">Nickels</div>
+                            <div class="label-text" data-i18n="nickels">Nickels</div>
                         </div>
                         <div class="coin-value">
                             <input type="number" id="c5" value="0" min="0" step="1">
@@ -59,7 +70,7 @@
                     <div class="coin-input">
                         <div class="coin-label">
                             <div class="denomination">10¢</div>
-                            <div class="label-text">Dimes</div>
+                            <div class="label-text" data-i18n="dimes">Dimes</div>
                         </div>
                         <div class="coin-value">
                             <input type="number" id="c10" value="0" min="0" step="1">
@@ -73,7 +84,7 @@
                     <div class="coin-input">
                         <div class="coin-label">
                             <div class="denomination">25¢</div>
-                            <div class="label-text">Quarters</div>
+                            <div class="label-text" data-i18n="quarters">Quarters</div>
                         </div>
                         <div class="coin-value">
                             <input type="number" id="c25" value="0" min="0" step="1">
@@ -87,7 +98,7 @@
                     <div class="coin-input">
                         <div class="coin-label">
                             <div class="denomination">50¢</div>
-                            <div class="label-text">Half Dollars</div>
+                            <div class="label-text" data-i18n="halfDollars">Half Dollars</div>
                         </div>
                         <div class="coin-value">
                             <input type="number" id="c50" value="0" min="0" step="1">
@@ -101,7 +112,7 @@
                     <div class="coin-input">
                         <div class="coin-label">
                             <div class="denomination">$1</div>
-                            <div class="label-text">Dollars</div>
+                            <div class="label-text" data-i18n="dollars">Dollars</div>
                         </div>
                         <div class="coin-value">
                             <input type="number" id="c100" value="0" min="0" step="1">
@@ -115,7 +126,7 @@
                     <div class="coin-input">
                         <div class="coin-label">
                             <div class="denomination">$5</div>
-                            <div class="label-text">Five Dollars</div>
+                            <div class="label-text" data-i18n="fiveDollars">Five Dollars</div>
                         </div>
                         <div class="coin-value">
                             <input type="number" id="c500" value="0" min="0" step="1">
@@ -129,7 +140,7 @@
                     <div class="coin-input">
                         <div class="coin-label">
                             <div class="denomination">$10</div>
-                            <div class="label-text">Ten Dollars</div>
+                            <div class="label-text" data-i18n="tenDollars">Ten Dollars</div>
                         </div>
                         <div class="coin-value">
                             <input type="number" id="c1000" value="0" min="0" step="1">
@@ -143,7 +154,7 @@
                     <div class="coin-input">
                         <div class="coin-label">
                             <div class="denomination">$20</div>
-                            <div class="label-text">Twenty Dollars</div>
+                            <div class="label-text" data-i18n="twentyDollars">Twenty Dollars</div>
                         </div>
                         <div class="coin-value">
                             <input type="number" id="c2000" value="0" min="0" step="1">
@@ -156,18 +167,18 @@
                 </div>
                 
                 <div class="total-display" id="totalContainer">
-                    <span class="total-label">Total in Register:</span>
+                    <span class="total-label" data-i18n="totalInRegister">Total in Register:</span>
                     <span class="total-value" id="totalAmount">$0.00</span>
                 </div>
                 
                 <div class="holdover-section">
-                    <h3>End of Day Settings</h3>
+                    <h3 data-i18n="endOfDaySettings">End of Day Settings</h3>
                     <div class="holdover-input">
                         <label for="holdover">
-                            Holdover Amount:
+                            <span data-i18n="holdoverAmount">Holdover Amount:</span>
                             <span class="tooltip">
                                 <i class="fas fa-info-circle"></i>
-                                <span class="tooltiptext">Amount to be kept in the register for the next day</span>
+                                <span class="tooltiptext" data-i18n="holdoverTooltip">Amount to be kept in the register for the next day</span>
                             </span>
                         </label>
                         <div class="formatted-currency">
@@ -180,11 +191,11 @@
                 <div class="action-bar">
                     <button class="btn btn-secondary" id="reset">
                         <i class="fas fa-sync"></i>
-                        Reset
+                        <span data-i18n="reset">Reset</span>
                     </button>
                     <button class="btn btn-primary btn-lg" id="calculate">
                         <i class="fas fa-calculator"></i>
-                        Calculate End Day
+                        <span data-i18n="calculateEndDay">Calculate End Day</span>
                     </button>
                 </div>
             </div>
@@ -192,25 +203,25 @@
             <div class="card results-card" id="resultsCard">
                 <h2 class="card-title">
                     <i class="fas fa-money-bill-wave"></i>
-                    Cash to Remove
+                    <span data-i18n="cashToRemove">Cash to Remove</span>
                 </h2>
                 
                 <div class="summary-section">
                     <div class="summary-item">
-                        <span>Total in Register:</span>
+                        <span data-i18n="totalInRegister">Total in Register:</span>
                         <span id="summaryTotal">$0.00</span>
                     </div>
                     <div class="summary-item">
-                        <span>Holdover Amount:</span>
+                        <span data-i18n="holdoverAmount">Holdover Amount:</span>
                         <span id="summaryHoldover">$0.00</span>
                     </div>
                     <div class="summary-item">
-                        <span>Amount to Remove:</span>
+                        <span data-i18n="amountToRemove">Amount to Remove:</span>
                         <span id="summaryRemove">$0.00</span>
                     </div>
                 </div>
                 
-                <h3 style="margin-top: 1.5rem; margin-bottom: 0.5rem;">Denominations to Remove:</h3>
+                <h3 style="margin-top: 1.5rem; margin-bottom: 0.5rem;" data-i18n="denominationsToRemove">Denominations to Remove:</h3>
                 <div id="result" class="results-list">
                     <!-- Results will be added here by JS -->
                 </div>
@@ -218,11 +229,11 @@
                 <div class="action-bar">
                     <button class="btn btn-secondary" id="printResults">
                         <i class="fas fa-print"></i>
-                        Print
+                        <span data-i18n="print">Print</span>
                     </button>
                     <button class="btn btn-primary" id="newCalculation">
                         <i class="fas fa-redo"></i>
-                        New Calculation
+                        <span data-i18n="newCalculation">New Calculation</span>
                     </button>
                 </div>
             </div>

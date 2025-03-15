@@ -1,4 +1,97 @@
 $(document).ready(function() {
+    // Translations
+    const translations = {
+        en: {
+            title: "Cash Register",
+            subtitle: "End-of-Day Cash Management",
+            language: "Language:",
+            registerContents: "Current Register Contents",
+            pennies: "Pennies",
+            nickels: "Nickels",
+            dimes: "Dimes",
+            quarters: "Quarters",
+            halfDollars: "Half Dollars",
+            dollars: "Dollars",
+            fiveDollars: "Five Dollars",
+            tenDollars: "Ten Dollars",
+            twentyDollars: "Twenty Dollars",
+            totalInRegister: "Total in Register:",
+            endOfDaySettings: "End of Day Settings",
+            holdoverAmount: "Holdover Amount:",
+            holdoverTooltip: "Amount to be kept in the register for the next day",
+            reset: "Reset",
+            calculateEndDay: "Calculate End Day",
+            cashToRemove: "Cash to Remove",
+            amountToRemove: "Amount to Remove:",
+            denominationsToRemove: "Denominations to Remove:",
+            print: "Print",
+            newCalculation: "New Calculation",
+            penny: "Penny",
+            nickel: "Nickel",
+            dime: "Dime",
+            quarter: "Quarter",
+            halfDollar: "Half Dollar",
+            dollar: "Dollar",
+            noCoinsToRemove: "No coins need to be removed."
+        },
+        es: {
+            title: "Caja Registradora",
+            subtitle: "Gestión de Efectivo al Final del Día",
+            language: "Idioma:",
+            registerContents: "Contenido Actual de la Caja",
+            pennies: "Centavos",
+            nickels: "Cinco Centavos",
+            dimes: "Diez Centavos",
+            quarters: "Veinticinco Centavos",
+            halfDollars: "Cincuenta Centavos",
+            dollars: "Dólares",
+            fiveDollars: "Cinco Dólares",
+            tenDollars: "Diez Dólares",
+            twentyDollars: "Veinte Dólares",
+            totalInRegister: "Total en Caja:",
+            endOfDaySettings: "Configuración de Cierre",
+            holdoverAmount: "Cantidad a Mantener:",
+            holdoverTooltip: "Cantidad que debe mantenerse en la caja para el día siguiente",
+            reset: "Reiniciar",
+            calculateEndDay: "Calcular Cierre",
+            cashToRemove: "Efectivo para Retirar",
+            amountToRemove: "Cantidad a Retirar:",
+            denominationsToRemove: "Denominaciones a Retirar:",
+            print: "Imprimir",
+            newCalculation: "Nuevo Cálculo",
+            penny: "Centavo",
+            nickel: "Cinco Centavos",
+            dime: "Diez Centavos",
+            quarter: "Veinticinco Centavos",
+            halfDollar: "Cincuenta Centavos",
+            dollar: "Dólar",
+            noCoinsToRemove: "No hay monedas para retirar."
+        }
+    };
+    
+    // Load saved language preference or default to English
+    let currentLang = localStorage.getItem('cashRegisterLanguage') || 'en';
+    $('#languageSelect').val(currentLang);
+    
+    // Apply translations on page load
+    applyTranslations(currentLang);
+    
+    // Handle language change
+    $('#languageSelect').change(function() {
+        currentLang = $(this).val();
+        localStorage.setItem('cashRegisterLanguage', currentLang);
+        applyTranslations(currentLang);
+    });
+    
+    // Apply translations based on language code
+    function applyTranslations(lang) {
+        $('[data-i18n]').each(function() {
+            const key = $(this).attr('data-i18n');
+            if (translations[lang] && translations[lang][key]) {
+                $(this).text(translations[lang][key]);
+            }
+        });
+    }
     // Input field focus styling
     $('input').focus(function() {
         $(this).closest('.coin-input').addClass('active');
@@ -57,17 +150,29 @@ $(document).ready(function() {
     
     // Format denomination names
     function formatDenomination(value) {
+        const lang = $('#languageSelect').val();
+        
         switch(parseInt(value)) {
-            case 1: return "1¢ (Penny)";
-            case 5: return "5¢ (Nickel)";
-            case 10: return "10¢ (Dime)";
-            case 25: return "25¢ (Quarter)";
-            case 50: return "50¢ (Half Dollar)";
-            case 100: return "$1";
-            case 500: return "$5";
-            case 1000: return "$10";
-            case 2000: return "$20";
-            default: return value + "¢";
+            case 1: 
+                return lang === 'en' ? "1¢ (Penny)" : "1¢ (Centavo)";
+            case 5: 
+                return lang === 'en' ? "5¢ (Nickel)" : "5¢ (Cinco Centavos)";
+            case 10: 
+                return lang === 'en' ? "10¢ (Dime)" : "10¢ (Diez Centavos)";
+            case 25: 
+                return lang === 'en' ? "25¢ (Quarter)" : "25¢ (Veinticinco Centavos)";
+            case 50: 
+                return lang === 'en' ? "50¢ (Half Dollar)" : "50¢ (Cincuenta Centavos)";
+            case 100: 
+                return lang === 'en' ? "$1" : "$1 (Un Dólar)";
+            case 500: 
+                return lang === 'en' ? "$5" : "$5 (Cinco Dólares)";
+            case 1000: 
+                return lang === 'en' ? "$10" : "$10 (Diez Dólares)";
+            case 2000: 
+                return lang === 'en' ? "$20" : "$20 (Veinte Dólares)";
+            default: 
+                return value + "¢";
         }
     }
     
@@ -112,7 +217,10 @@ $(document).ready(function() {
                 $('#result').empty();
                 
                 if (Object.keys(response).length === 0) {
-                    $('#result').html('<div class="alert alert-info"><i class="fas fa-info-circle"></i> No coins need to be removed.</div>');
+                    const noCoinsMessage = currentLang === 'en' ? 
+                        translations.en.noCoinsToRemove : 
+                        translations.es.noCoinsToRemove;
+                    $('#result').html(`<div class="alert alert-info"><i class="fas fa-info-circle"></i> ${noCoinsMessage}</div>`);
                 } else {
                     // Sort denominations from highest to lowest
                     const sortedDenominations = Object.keys(response).sort((a, b) => parseInt(b) - parseInt(a));
