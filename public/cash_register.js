@@ -2,7 +2,7 @@ $(document).ready(function() {
     // Translations
     const translations = {
         en: {
-            title: "Cash Register V2",
+            title: "Cash Register V3",
             subtitle: "End-of-Day Cash Management",
             language: "Language:",
             registerContents: "Current Register Contents",
@@ -35,7 +35,7 @@ $(document).ready(function() {
             noCoinsToRemove: "No coins need to be removed."
         },
         es: {
-            title: "Caja Registradora V2",
+            title: "Caja Registradora V3",
             subtitle: "Gestión de Efectivo al Final del Día",
             language: "Idioma:",
             registerContents: "Contenido Actual de la Caja",
